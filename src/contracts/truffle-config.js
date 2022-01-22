@@ -69,7 +69,7 @@ module.exports = {
     rinkeby: {
     provider: () => new HDWalletProvider({
       privateKeys: private_keys, 
-      providerOrUrl: `wss://rinkeby.infura.io/ws/v3/c78900e37828419ca291349f3fd61907`,
+      providerOrUrl: `https://mainnet.infura.io/v3/c78900e37828419ca291349f3fd61907`,
       numberOfAddresses: 2
     } ),
     network_id: 4,       // Ropsten's id

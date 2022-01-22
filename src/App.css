@@ -40,6 +40,8 @@ li{
 
 body{
   background: var(--light-grey);
+  max-width: 100vw;
+  overflow-x: hidden;
 
 }
 
@@ -56,12 +58,11 @@ body{
     top: 0;
     left: 0;
     width: 100%;
-    height: 40px;
     z-index: 10;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 10%;
+    padding: 10px 10%;
     
     background: var(--green);
     color: var(--white);
@@ -107,6 +108,18 @@ header h1{
     color: var(--white);
 }
 
+.navbar-item{
+    display: flex;
+    color: var(--white);
+}
+
+.navbar-item img{
+    background-color: var(--primary);
+    border-radius: 50%;
+    margin-top: -4px;
+    margin-right: 10px;
+}
+
 .responsive-title{
     font-weight: 600;
     font-size: 1.5rem;
@@ -117,7 +130,7 @@ header h1{
 
 .Section{
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     background: linear-gradient(45deg, var(--blue), var(--pink));
 }
 
@@ -179,12 +192,22 @@ header h1{
     min-width: 100%;
 }
 
+.form-item-text{
+    width: 100%;
+    margin: 10px 0;
+    color: var(--light-grey);
+}
+
+.form-item-text.right{
+
+    text-align: right;
+}
+
 .form-swap{
     display: flex;
     align-items: center;
     justify-content: end;
-    padding: 0 20px;
-    width: 100%;
+
 }
 
 .form-input{
@@ -342,10 +365,52 @@ button.button:disabled:hover:after{
     box-shadow: none;
 }
 
-button.button.button-swap{
-  font-size: 2rem;
-  line-height: 0;
-  padding: 10px 20px;
+button.button-swap{
+    border: none;
+    outline: none;
+    background: none;
+    border-radius: 10px;
+    height: 40px;
+    width: 40px;
+    line-height: 46px;
+    font-size: 1.5rem;
+    color: var(--light-grey);
+    cursor: pointer;
+    box-shadow: 
+        -10px -10px 15px rgba(255, 255, 255, 0.1),
+        2px 2px 5px rgba(0, 0, 0, 0.1),
+        5px 10px 10px rgba(0, 0, 0, 0.05)
+    ;
+}
+
+button.button-swap:hover:after{
+    box-shadow: 
+    inset -10px -10px 15px rgba(255, 255, 255, 0.05),
+    inset 2px 2px 5px rgba(0, 0, 0, 0.05),
+    inset 5px 10px 10px rgba(0, 0, 0, 0.02)
+    ;
+}
+
+
+footer{
+ display: flex;
+ justify-content: center;   
+ color: var(--light-grey);
+ margin-top: 40px;
+}
+
+.full-loader{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 5;
+    background-color:  var(--dark-primary);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 @media screen and (max-width: 700px) {

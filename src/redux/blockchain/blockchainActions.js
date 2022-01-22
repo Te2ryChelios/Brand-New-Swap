@@ -1,5 +1,6 @@
 import Web3 from "web3"
 import BrandNewSwap from "../../contracts/build/contracts/BrandNewSwap.json"
+import BNFToken from "../../contracts/build/contracts/BNFToken.json"
 
 
 const connectRequest = () => {
@@ -47,18 +48,34 @@ export const connect = () => {
                     BrandNewSwap.abi,
                     BrandNewSwapNetworkData.address
                  )
-                 dispatch(
-                     connectSuccess({
-                         account: accounts[0],
-                         web3: web3,
-                     })
-                 )
-                 window.ethereum.on("accountsChanged", (accounts) => {
-                     dispatch(updateAccount(accounts[0]))
-                 })
-                 window.ethereum.on("chainChanged", () => {
-                    window.location.reload()
-                })
+                 const ethBalance = await web3.eth.getBalance(accounts[0])
+                 const tokenData = await BNFToken.networks[networkId];
+                 if(tokenData){
+                     const token = new web3.eth.Contract(
+                         BNFToken.abi,
+                         tokenData.address
+                     )
+                     let tokenBalance = await token.methods.balanceOf(accounts[0]).call()
+                     dispatch(
+                        connectSuccess({
+                            account: accounts[0],
+                            ethBalance: ethBalance,
+                            tokenBalance: tokenBalance,
+                            web3: web3,
+                            swap: swap,
+                            token: token
+                        })
+                    )
+                    window.ethereum.on("accountsChanged", (accounts) => {
+                        dispatch(updateAccount(accounts[0]))
+                    })
+                    window.ethereum.on("chainChanged", () => {
+                       window.location.reload()
+                   })
+                 }else{
+                    dispatch(connectFailed("Failed to load token"))
+                 }
+            
              } else {
                  dispatch(connectFailed("Change network to Polygon"))
              }
@@ -66,7 +83,7 @@ export const connect = () => {
                 dispatch(connectFailed("Something went wrong"))
             }
         }else {
-            dispatch(connectFailed("Metamask required"))
+            dispatch(connectFailed("Ethereum Network required! Please install Metamask and come back"))
         }
     }
 }

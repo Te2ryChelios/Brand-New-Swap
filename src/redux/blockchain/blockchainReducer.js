@@ -1,7 +1,11 @@
 const initialState = {
     loading: false,
-    account: null,
     web3: null,
+    account: null,
+    swap: null,
+    token: null,
+    ethBalance: 0,
+    tokenBalance: 0,
     errorMsg: "",
 }
 
@@ -16,8 +20,12 @@ const blockchainReducer = (state = initialState, action) => {
             return{
                 ...state,
                 loading: false,
-                account: action.payload.account,
                 web3: action.payload.web3,
+                account: action.payload.account,
+                swap: action.payload.swap,
+                token: action.payload.token,
+                tokenBalance: action.payload.tokenBalance,
+                ethBalance: action.payload.ethBalance,
             }
         case "CONNECTION_FAILED":
             return {

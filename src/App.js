@@ -8,6 +8,8 @@ import Web3 from 'web3'
 import { useDispatch, useSelector } from 'react-redux'
 import {connect} from './redux/blockchain/blockchainActions'
 import {fetchData} from './redux/data/dataActions'
+import { css } from "@emotion/react";
+import ClipLoader from "react-spinners/ClipLoader";
 
 function App() {
   const [alert, setAlert] = useState({
@@ -15,6 +17,7 @@ function App() {
     type: '',
     message: ''
   })
+  const [loading, setLoading] = useState(true)
 
   
   const dispatch = useDispatch()
@@ -23,18 +26,23 @@ function App() {
 
   useEffect(() => {
     if(blockchain.errorMsg){
+      resetAlert()
       setAlert({
         isActive: true,
         type: 'error',
-        message: blockchain.errorMsg.toString()
+        message: blockchain.errorMsg
       })
     }
   }, [blockchain.errorMsg])
 
 
   useEffect(() => {
-    dispatch(connect())
-    console.log(blockchain)
+    setLoading(true)
+    const logged = async () => {
+      await dispatch(connect())
+    }
+    logged()
+    setLoading(false)
   }, [])
 
   useEffect(() => {
@@ -50,11 +58,15 @@ function App() {
 
   return (
     <div className="Section">
+      {loading && <div className='full-loader'><ClipLoader color={"#673AB7"} loading={loading}  size={150} /></div>}
       {alert.isActive && <Alert alert={alert} resetAlert={resetAlert} />}
-      <Navbar account={blockchain.account} />
+      <Navbar blockchain={blockchain} />
       <div className="flex-center">
-        <Swapper alert={alert} setAlert={setAlert} resetAlert={resetAlert} />
+        <Swapper alert={alert} setAlert={setAlert} resetAlert={resetAlert} blockchain={blockchain} dispatch={dispatch} />
       </div>
+      <footer>
+      Copyright © 2021 Chelios.
+      </footer>
     </div>
   );
 }

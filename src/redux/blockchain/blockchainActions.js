@@ -42,7 +42,10 @@ export const connect = () => {
              const networkId = await window.ethereum.request({
                  method: "net_version",
              })
-             const BrandNewSwapNetworkData = await BrandNewSwap.networks[networkId]   
+             console.log('Accounts : ', accounts)
+             console.log('Network ID: ', networkId)
+             const BrandNewSwapNetworkData = await BrandNewSwap.networks[networkId]  
+             console.log('BrandNewSwapNetworkData: ',BrandNewSwapNetworkData) 
              if(BrandNewSwapNetworkData && networkId === "4"){
                  const swap = new web3.eth.Contract(
                     BrandNewSwap.abi,

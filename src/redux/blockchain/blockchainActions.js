@@ -81,6 +81,7 @@ export const connect = () => {
                  dispatch(connectFailed("Rinkeby network required"))
              }
             } catch (err) {
+                console.log(err)
                 dispatch(connectFailed("Something went wrong"))
             }
         }else {

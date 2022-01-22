@@ -16,7 +16,7 @@ const Swapper = ({alert, setAlert, resetAlert, blockchain, dispatch}) => {
 
     const buyTokens = async () => {
         blockchain.swap.methods.buyTokens()
-        .send({value: blockchain.web3.utils.toWei(inputETH, "Ether"), from: blockchain.account})
+        .send({value: blockchain.web3.utils.toWei(inputETH, "Ether"), from: blockchain.account.address})
         .on('transactionHash', (hash) => {
             setLoading(false)
             setAlert({
@@ -41,10 +41,10 @@ const Swapper = ({alert, setAlert, resetAlert, blockchain, dispatch}) => {
         let tokenAmount = blockchain.web3.utils.toWei(inputBNF.toString(), "Ether")
         await blockchain.token.methods
             .approve(blockchain.swap._address, tokenAmount)
-            .send({from: blockchain.account})
+            .send({from: blockchain.account.address})
         
         await blockchain.swap.methods.sellTokens(tokenAmount)
-        .send({from: blockchain.account})
+        .send({from: blockchain.account.address})
 
         setLoading(false)
         setAlert({

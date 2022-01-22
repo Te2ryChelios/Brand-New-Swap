@@ -43,7 +43,6 @@ export const connect = () => {
                  method: "net_version",
              })
              const BrandNewSwapNetworkData = await BrandNewSwap.networks[networkId]   
-             console.log(networkId, BrandNewSwapNetworkData)
              if(BrandNewSwapNetworkData && networkId === "4"){
                  const swap = new web3.eth.Contract(
                     BrandNewSwap.abi,

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {MdSwapVert} from 'react-icons/md'
-import {connect} from '../../redux/blockchain/blockchainActions'
+import {connect, updateAccount} from '../../redux/blockchain/blockchainActions'
 
 const Swapper = ({alert, setAlert, resetAlert, blockchain, dispatch}) => {
     const [swap, setSwap] = useState(false)
@@ -39,11 +39,11 @@ const Swapper = ({alert, setAlert, resetAlert, blockchain, dispatch}) => {
     const sellTokens = async () => {
         console.log(inputETH)
         let tokenAmount = blockchain.web3.utils.toWei(inputBNF.toString(), "Ether")
-        let approve = await blockchain.token.methods
+        await blockchain.token.methods
             .approve(blockchain.swap._address, tokenAmount)
             .send({from: blockchain.account})
         
-        let sell = await blockchain.swap.methods.sellTokens(tokenAmount)
+        await blockchain.swap.methods.sellTokens(tokenAmount)
         .send({from: blockchain.account})
 
         setLoading(false)
@@ -83,6 +83,10 @@ const Swapper = ({alert, setAlert, resetAlert, blockchain, dispatch}) => {
            setInputETH(inputBNF / 100)
        }
     }, [inputETH, inputBNF, swap])
+
+    useEffect(() => {
+        dispatch(updateAccount(blockchain.account))
+    }, [blockchain.account])
 
     return (
         <div className="box">

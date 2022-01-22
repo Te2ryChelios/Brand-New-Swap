@@ -4,11 +4,9 @@ import 'animate.css'
 import Navbar from './components/navbar';
 import Swapper from './components/swapper';
 import Alert from './components/alert';
-import Web3 from 'web3'
 import { useDispatch, useSelector } from 'react-redux'
 import {connect} from './redux/blockchain/blockchainActions'
 import {fetchData} from './redux/data/dataActions'
-import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
 
 function App() {
@@ -22,7 +20,6 @@ function App() {
   
   const dispatch = useDispatch()
   const blockchain = useSelector((state) => state.blockchain)
-  const data = useSelector((state) => state.data)
 
   useEffect(() => {
     if(blockchain.errorMsg){

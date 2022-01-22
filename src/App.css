@@ -206,7 +206,7 @@ header h1{
 .form-swap{
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
 
 }
 

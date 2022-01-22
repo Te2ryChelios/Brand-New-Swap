@@ -1,5 +1,4 @@
 import React from 'react';
-import Identicon from 'identicon.js'
 
 const Navbar = ({blockchain}) => {
   return (

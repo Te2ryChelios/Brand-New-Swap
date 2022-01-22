@@ -43,7 +43,8 @@ export const connect = () => {
                  method: "net_version",
              })
              const BrandNewSwapNetworkData = await BrandNewSwap.networks[networkId]   
-             if(BrandNewSwapNetworkData){
+             console.log(networkId, BrandNewSwapNetworkData)
+             if(BrandNewSwapNetworkData && networkId === "4"){
                  const swap = new web3.eth.Contract(
                     BrandNewSwap.abi,
                     BrandNewSwapNetworkData.address
@@ -77,7 +78,7 @@ export const connect = () => {
                  }
             
              } else {
-                 dispatch(connectFailed("Change network to Polygon"))
+                 dispatch(connectFailed("Rinkeby network required"))
              }
             } catch (err) {
                 dispatch(connectFailed("Something went wrong"))

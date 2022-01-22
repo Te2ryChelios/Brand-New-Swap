@@ -33,8 +33,8 @@ const updateAccountRequest = (payload) => {
 export const connect = () => {
     return async (dispatch) => {
         dispatch(connectRequest());
-        if(window.ethereum){
-            let web3 = new Web3(window.ethereum)
+        if(window.ethereum || window.web3){
+            let web3 = new Web3(window.ethereum || window.web3.currentProvider)
             try{
              const accounts = await web3.eth.getAccounts(console.log)
              const networkId = await window.ethereum.request({

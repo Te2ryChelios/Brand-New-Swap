@@ -33,17 +33,20 @@ const updateAccountRequest = (payload) => {
 export const connect = () => {
     return async (dispatch) => {
         dispatch(connectRequest());
-        if(window.ethereum || window.web3){
-            let web3 = new Web3(window.ethereum || window.web3.currentProvider)
+        if(window.web3){
+            console.log('Window.eth: ', window.ethereum)
+            console.log('Window.web3: ', window.web3)
+            console.log('Window.web3.currentProvider: ', window.web3.currentProvider)
+            let web3 = new Web3(window.web3.currentProvider)
             try{
-             const accounts = await web3.eth.getAccounts(console.log)
+             const accounts = await web3.eth.getAccounts()
              const networkId = await window.ethereum.request({
                  method: "net_version",
              })
-             console.log('Accounts : ', accounts)
-             console.log('Network ID: ', networkId)
+            //  console.log('Accounts : ', accounts)
+            //  console.log('Network ID: ', networkId)
              const BrandNewSwapNetworkData = await BrandNewSwap.networks[networkId]  
-             console.log('BrandNewSwapNetworkData: ',BrandNewSwapNetworkData) 
+            //  console.log('BrandNewSwapNetworkData: ',BrandNewSwapNetworkData) 
              if(BrandNewSwapNetworkData && networkId === "4"){
                  const swap = new web3.eth.Contract(
                     BrandNewSwap.abi,

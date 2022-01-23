@@ -37,7 +37,7 @@ const Swapper = ({alert, setAlert, resetAlert, blockchain, dispatch}) => {
     }
 
     const sellTokens = async () => {
-        console.log(inputETH)
+        //console.log(inputETH)
         let tokenAmount = blockchain.web3.utils.toWei(inputBNF.toString(), "Ether")
         await blockchain.token.methods
             .approve(blockchain.swap._address, tokenAmount)

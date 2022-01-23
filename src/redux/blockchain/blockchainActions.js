@@ -34,12 +34,9 @@ export const connect = () => {
     return async (dispatch) => {
         dispatch(connectRequest());
         if(window.web3){
-            console.log('Window.eth: ', window.ethereum)
-            console.log('Window.web3: ', window.web3)
-            console.log('Window.web3.currentProvider: ', window.web3.currentProvider)
             let web3 = new Web3(window.web3.currentProvider)
             try{
-             const accounts = await web3.eth.getAccounts()
+             const accounts = await web3.eth.requestAccounts()
              const networkId = await window.ethereum.request({
                  method: "net_version",
              })
@@ -84,7 +81,7 @@ export const connect = () => {
                  dispatch(connectFailed("Rinkeby network required"))
              }
             } catch (err) {
-                console.log(err)
+                //console.log(err)
                 dispatch(connectFailed("Something went wrong"))
             }
         }else {

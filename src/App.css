@@ -132,6 +132,7 @@ header h1{
     width: 100vw;
     min-height: 100vh;
     background: linear-gradient(45deg, var(--blue), var(--pink));
+    z-index: 1;
 }
 
 .Section::before{
@@ -143,6 +144,7 @@ header h1{
     height: 100%;
     background: rgba(255,255,255, 0.05);
     clip-path: circle(60% at right 70%);
+    z-index: 2;
 }
 
 .Section::after{
@@ -154,6 +156,7 @@ header h1{
     height: 100%;
     background: rgba(255,255,255, 0.1);
     clip-path: circle(60% at 0% 0%);
+    z-index: 2;
 }
 
 
@@ -391,12 +394,32 @@ button.button-swap:hover:after{
     ;
 }
 
+.wrapper{
+    z-index: 3;
+    position: relative;
+}
+
 
 footer{
  display: flex;
- justify-content: center;   
+ align-items: center;
+ justify-content: center;
  color: var(--light-grey);
  margin-top: 40px;
+}
+
+footer a{
+    color: var(--dark-primary);
+
+    transition: color 0.3s;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0 10px;
+    height: 100%;
+}
+
+footer a:hover{
+    color: var(--primary);
 }
 
 .full-loader{

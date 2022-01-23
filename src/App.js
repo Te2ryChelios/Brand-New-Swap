@@ -55,6 +55,7 @@ function App() {
 
   return (
     <div className="Section">
+      <div className="wrapper">
       {loading && <div className='full-loader'><ClipLoader color={"#673AB7"} loading={loading}  size={150} /></div>}
       {alert.isActive && <Alert alert={alert} resetAlert={resetAlert} />}
       <Navbar blockchain={blockchain} />
@@ -62,8 +63,9 @@ function App() {
         <Swapper alert={alert} setAlert={setAlert} resetAlert={resetAlert} blockchain={blockchain} dispatch={dispatch} />
       </div>
       <footer>
-      Copyright © 2021 Chelios.
+      <p> Copyright © 2021</p><a href="https://chelios.herokuapp.com/">Chelios</a>
       </footer>
+      </div>
     </div>
   );
 }

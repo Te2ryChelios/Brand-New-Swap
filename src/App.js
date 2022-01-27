@@ -63,7 +63,7 @@ function App() {
         <Swapper alert={alert} setAlert={setAlert} resetAlert={resetAlert} blockchain={blockchain} dispatch={dispatch} />
       </div>
       <footer>
-      <p> Copyright © 2022</p><a href="https://chelios.herokuapp.com/">Chelios</a>
+      <p> Copyright © 2022</p><a href="http://chelios.fr/">Chelios</a>
       </footer>
       </div>
     </div>
